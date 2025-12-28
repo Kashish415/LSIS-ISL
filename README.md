@@ -62,43 +62,37 @@ Test Loss: 0.0024
 
 ### Hand Landmark Extraction
 
-MediaPipe Hand Landmarker detects 21 keypoints
-Each keypoint has (x, y, z) coordinates
-Total features: 21 × 3 = 63
+1. MediaPipe Hand Landmarker detects 21 keypoints
+2. Each keypoint has (x, y, z) coordinates
+3. Total features: 21 × 3 = 63
 
 ### Neural Network Architecture
 
-Input Layer:    63 features
-Dense Layer 1:  256 neurons (ReLU) + BatchNorm + Dropout(0.4)
-Dense Layer 2:  128 neurons (ReLU) + BatchNorm + Dropout(0.4)
-Dense Layer 3:  64 neurons (ReLU) + Dropout(0.3)
-Output Layer:   35 neurons (Softmax)
+1. Input Layer:    63 features
+2. Dense Layer 1:  256 neurons (ReLU) + BatchNorm + Dropout(0.4)
+3. Dense Layer 2:  128 neurons (ReLU) + BatchNorm + Dropout(0.4)
+4. Dense Layer 3:  64 neurons (ReLU) + Dropout(0.3)
+5. Output Layer:   35 neurons (Softmax)
 
 ### Model Training
 - Dataset: 100 images per class (3500 total)
 - Train/Test Split: 80/20
+- Batch Size: 32
 - Optimizer: Adam
+- Epochs: 60 (with early stopping)
 - Loss: Sparse Categorical Crossentropy
 - Callbacks: Early Stopping, ReduceLROnPlateau
 
 ### Model Pipeline 
 
-Webcam Frame → RGB Conversion → MediaPipe Detection → 
-Landmark Extraction → Feature Vector (63) → 
-Neural Network → Softmax Prediction → Display Result
+1. Webcam Frame → RGB Conversion → MediaPipe Detection → 
+2. Landmark Extraction → Feature Vector (63) → 
+3. Neural Network → Softmax Prediction → Display Result
 
 ### Class Distribution
 
-35 classes total:
+- 35 classes total:
 
-* Alphabets: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
-* Numbers: 1, 2, 3, 4, 5, 6, 7, 8, 9
+1. Alphabets: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+2. Numbers: 1, 2, 3, 4, 5, 6, 7, 8, 9
 
-### Training Details
-
-Dataset Size: 3,500 images (100 per class)
-Train/Test Split: 80/20
-Batch Size: 32
-Epochs: 50 (with early stopping)
-Optimizer: Adam
-Loss Function: Sparse Categorical Crossentropy
