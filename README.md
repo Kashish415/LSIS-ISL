@@ -15,11 +15,8 @@ Step 2: Upload Dataset to Google Colab
 1. Open your Colab notebook.
 2. In Colab, click the Files icon on the left sidebar
 3. Create a new folder: Right-click → New folder → Name it isl_dataset
-4. Upload the Indian folder inside isl_dataset:
-  * Right-click on isl_dataset folder
-  * Click Upload
-  * Select the entire Indian folder from your computer
-
+4. Upload the Indian folder inside isl_dataset.
+   OR
 Alternative (Faster): Upload the zip file and extract it in Colab using the below command:
 
 !unzip /content/archive.zip -d /content/isl_dataset/
