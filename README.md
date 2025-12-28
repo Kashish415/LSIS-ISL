@@ -2,30 +2,38 @@
 
 Real-time Indian Sign Language (ISL) recognition using MediaPipe and TensorFlow. This system can recognize 35 ISL signs (A-Z alphabets and 1-9 numbers) through webcam with 99% accuracy.
 
-## Dataset
+## Setup
 
-Indian Sign Language Dataset: [Kaggle Link](https://www.kaggle.com/datasets/prathumarikeri/indian-sign-language-isl)
+Step 1: Download Dataset
 
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/Kashish415/LSIS-ISL.git
-```
+Go to Kaggle and download the ISL dataset:
 
-### Step 2: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+* Dataset Link: https://www.kaggle.com/datasets/prathumarikeri/indian-sign-language-isl
 
-### Step 3: Run from colab environment
+Step 2: Upload Dataset to Google Colab
 
-Train your own model using the given Colab notebook.
+1. Open your Colab notebook.
+2. In Colab, click the Files icon on the left sidebar
+3. Create a new folder: Right-click → New folder → Name it isl_dataset
+4. Upload the Indian folder inside isl_dataset:
+  * Right-click on isl_dataset folder
+  * Click Upload
+  * Select the entire Indian folder from your computer
 
-Place these files in the project root directory, after downloading them and saving them to the vs code project folder:
+Alternative (Faster): Upload the zip file and extract it in Colab using the below command:
+
+!unzip /content/archive.zip -d /content/isl_dataset/
+
+Step 3: Train Your Own Model ( refer model_training.py file)
+
+Step 4: After training completes, downloading the following files and save them to the vs code project folder:
 - `isl_hand_model.h5`
 - `label_encoder.pkl`
 - `hand_landmarker.task`
 
-### Step 4: Run main.py ( vs code setup)
+Place these files in the project root directory
+
+### Step 5: Create main.py ( vs code setup -> pip install -r requirements.txt)
 
 Execute the main.py using terminal command:
 ```bash
@@ -43,12 +51,6 @@ Train Accuracy: 99.93%
 Test Loss: 0.0024
 ```
 
-**Model Architecture:**
-- Input: 63 features (21 hand landmarks × 3 coordinates)
-- Dense layers: 256 → 128 → 64
-- Dropout & Batch Normalization for regularization
-- Output: 35 classes (Softmax activation)
-
 ## How It Works
 
 1. **Hand Detection**: MediaPipe extracts 21 hand landmarks (x, y, z coordinates)
@@ -60,9 +62,18 @@ Test Loss: 0.0024
 ## Technical Details
 
 ### Hand Landmark Extraction
-- MediaPipe Hand Landmarker model
-- 21 keypoints per hand
-- Normalized coordinates (0-1 range)
+
+MediaPipe Hand Landmarker detects 21 keypoints
+Each keypoint has (x, y, z) coordinates
+Total features: 21 × 3 = 63
+
+### Neural Network Architecture
+
+Input Layer:    63 features
+Dense Layer 1:  256 neurons (ReLU) + BatchNorm + Dropout(0.4)
+Dense Layer 2:  128 neurons (ReLU) + BatchNorm + Dropout(0.4)
+Dense Layer 3:  64 neurons (ReLU) + Dropout(0.3)
+Output Layer:   35 neurons (Softmax)
 
 ### Model Training
 - Dataset: 100 images per class (3500 total)
@@ -70,3 +81,25 @@ Test Loss: 0.0024
 - Optimizer: Adam
 - Loss: Sparse Categorical Crossentropy
 - Callbacks: Early Stopping, ReduceLROnPlateau
+
+### Model Pipeline 
+
+Webcam Frame → RGB Conversion → MediaPipe Detection → 
+Landmark Extraction → Feature Vector (63) → 
+Neural Network → Softmax Prediction → Display Result
+
+### Class Distribution
+
+35 classes total:
+
+* Alphabets: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+* Numbers: 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+### Training Details
+
+Dataset Size: 3,500 images (100 per class)
+Train/Test Split: 80/20
+Batch Size: 32
+Epochs: 50 (with early stopping)
+Optimizer: Adam
+Loss Function: Sparse Categorical Crossentropy
