@@ -4,13 +4,13 @@ Real-time Indian Sign Language (ISL) recognition using MediaPipe and TensorFlow.
 
 ## Setup
 
-Step 1: Download Dataset
+### Step 1: Download Dataset
 
 Go to Kaggle and download the ISL dataset:
 
 * Dataset Link: https://www.kaggle.com/datasets/prathumarikeri/indian-sign-language-isl
 
-Step 2: Upload Dataset to Google Colab
+### Step 2: Upload Dataset to Google Colab
 
 1. Open your Colab notebook.
 2. In Colab, click the Files icon on the left sidebar
@@ -23,9 +23,13 @@ Alternative (Faster): Upload the zip file and extract it in Colab using the belo
 
 !unzip /content/archive.zip -d /content/isl_dataset/
 
-Step 3: Train Your Own Model ( refer model_training.py file)
+### Step 3: 
 
-Step 4: After training completes, downloading the following files and save them to the vs code project folder:
+Train Your Own Model ( refer model_training.py file)
+
+### Step 4: 
+
+After training completes, downloading the following files and save them to the vs code project folder:
 - `isl_hand_model.h5`
 - `label_encoder.pkl`
 - `hand_landmarker.task`
