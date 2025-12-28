@@ -23,13 +23,9 @@ Alternative (Faster): Upload the zip file and extract it in Colab using the belo
 
 !unzip /content/archive.zip -d /content/isl_dataset/
 
-### Step 3: 
+### Step 3: Train Your Own Model ( refer model_training.py file)
 
-Train Your Own Model ( refer model_training.py file)
-
-### Step 4: 
-
-After training completes, downloading the following files and save them to the vs code project folder:
+### Step 4: After training completes, downloading the following files and save them to the vs code project folder:
 - `isl_hand_model.h5`
 - `label_encoder.pkl`
 - `hand_landmarker.task`
